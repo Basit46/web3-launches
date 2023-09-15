@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .events ul li {
+    @apply text-center text-zinc-500 text-lg font-normal hover:text-purple-50 hover:font-bold cursor-pointer;
+  }
+
+  footer ul li {
+    @apply opacity-50 hover:opacity-100 text-white leading-[30px] cursor-pointer mb-[10px];
+  }
+}
