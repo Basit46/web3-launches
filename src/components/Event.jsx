@@ -30,7 +30,7 @@ const Event = () => {
           className="h-full w-full object-cover"
         />
       </div>
-      <div className="w-full pl-[7px] pr-2 py-1.5 rounded-[18.28px] border border-indigo-600 flex justify-between">
+      <div className="w-full pl-[7px] pr-2 py-1.5 rounded-[18.28px] border border-indigo-600 flex justify-between items-center">
         <img src={bsc} alt="bsc" />
         <p>14/09/2023</p>
       </div>

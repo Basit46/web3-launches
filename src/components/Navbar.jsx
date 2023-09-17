@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import logo from "../assets/logo.svg";
 import MobileMenu from "./MobileMenu";
 import { FaBars, FaTimes } from "react-icons/fa";
-import { Link as ScrollLink } from "react-scroll";
 import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
@@ -23,9 +22,7 @@ const Navbar = () => {
         <p className="font-bold text-[39.31px] font-SpaceGrotesk">Logo</p>
       </Link>
       <div className="hidden md:flex gap-[30px] items-center font-[500]">
-        <ScrollLink to="events" duration={500} smooth={true}>
-          Events
-        </ScrollLink>
+        <NavLink to="/events">Events</NavLink>
         <NavLink to="/addevent">Add Event</NavLink>
         <a href="#">Profile</a>
       </div>
