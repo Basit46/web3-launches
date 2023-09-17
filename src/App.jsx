@@ -1,15 +1,18 @@
 import React from "react";
-import Events from "./components/Events";
+import { Routes, Route } from "react-router-dom";
 import Footer from "./components/Footer";
-import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
+import AddEvent from "./pages/AddEvent";
+import Home from "./pages/Home";
 
 const App = () => {
   return (
     <div className="max-w-[1400px] mx-auto min-h-screen font-Inter bg-[#121418] text-white">
       <Navbar />
-      <Hero />
-      <Events />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/addevent" element={<AddEvent />} />
+      </Routes>
       <Footer />
     </div>
   );

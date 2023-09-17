@@ -69,7 +69,7 @@ const Footer = () => {
         </ul>
       </div>
 
-      <ScrollLink to="hero" smooth={true} duration={500} offset={-100}>
+      <ScrollLink to="nav" smooth={true} duration={500} offset={-1500}>
         <div className="absolute right-[50px] top-[20px] md:top-[50px] bg-[#494949] w-[60px] h-[60px] cursor-pointer rounded-full grid place-items-center">
           <img src={arrow} alt="arrow img" />
         </div>

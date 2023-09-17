@@ -13,4 +13,20 @@
   footer ul li {
     @apply opacity-50 hover:opacity-100 text-white leading-[30px] cursor-pointer mb-[10px];
   }
+
+  form input {
+    @apply block h-[45px] px-[10px] bg-transparent rounded-lg border border-purple-50;
+  }
+  form .left label {
+    @apply text-xl font-medium;
+  }
+  form .right div {
+    @apply w-full flex items-center gap-[21px] mb-[10px];
+  }
+  form .right div label {
+    @apply h-[45px] w-[50px] rounded-lg border border-violet-50 grid place-items-center text-white;
+  }
+  form .right div input {
+    @apply flex-1;
+  }
 }
