@@ -2,6 +2,7 @@ import React from "react";
 import Hero from "../components/Hero";
 import Event from "../components/Event";
 import { useEventsContext } from "../context/eventsContext";
+import { categories } from "../constants/categories";
 
 const Home = () => {
   const { events } = useEventsContext();
@@ -24,11 +25,11 @@ const Home = () => {
           defaultValue="All"
           className="mt-[20px] block vsm:hidden mx-auto w-[80%] h-[30px] bg-transparent text-white border-[1px] border-white outline-none px-[5px]"
         >
-          <option value="All">All</option>
-          <option value="ICO">ICO</option>
-          <option value="Launch">Launch</option>
-          <option value="NFT MINT">NFT Mint</option>
-          <option value="Conferences">Conferences</option>
+          {categories.map((category) => (
+            <option key={category} value={category}>
+              {category}
+            </option>
+          ))}
         </select>
 
         <div className="mt-[47px] flex flex-wrap gap-x-[24px] gap-y-[32px] justify-center">

@@ -15,7 +15,8 @@
   }
 
   form input,
-  textarea {
+  textarea,
+  form select {
     @apply block h-[45px] px-[10px] bg-transparent rounded-lg border border-purple-50;
   }
   form .left label {

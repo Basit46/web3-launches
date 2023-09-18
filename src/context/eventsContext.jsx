@@ -1,11 +1,12 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { db } from "../../firebase";
-import { onSnapshot, collection } from "firebase/firestore";
+import { onSnapshot, collection, setDoc, doc } from "firebase/firestore";
 
 const eventsContext = createContext();
 
 const EventsContextProvider = ({ children }) => {
-  const [events, setEvents] = useState([]);
+  const [recEvents, setRecEvents] = useState([]);
+  const [events, setEvents] = useState(recEvents);
 
   const colRef = collection(db, "events");
   useEffect(() => {
@@ -14,13 +15,38 @@ const EventsContextProvider = ({ children }) => {
         id: doc.id,
         ...doc.data(),
       }));
-      console.log(updatedData);
-      setEvents(updatedData);
+      setRecEvents(updatedData);
     });
   }, []);
 
+  const addEvent = (newEvent) => {
+    setDoc(doc(db, "events", newEvent.id), newEvent);
+  };
+
+  const filterByCategory = (category) => {
+    if (category === "All") {
+      setEvents(recEvents);
+    } else {
+      setEvents(recEvents.filter((event) => event.category === category));
+    }
+  };
+
+  const filterBySearch = (text) => {
+    if (text === "") {
+      setEvents(recEvents);
+    } else {
+      setEvents(
+        recEvents.filter((event) =>
+          event.name.toLowerCase().includes(text.trim().toLowerCase())
+        )
+      );
+    }
+  };
+
   return (
-    <eventsContext.Provider value={{ events }}>
+    <eventsContext.Provider
+      value={{ events, addEvent, filterByCategory, filterBySearch }}
+    >
       {children}
     </eventsContext.Provider>
   );
