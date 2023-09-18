@@ -14,7 +14,8 @@
     @apply opacity-50 hover:opacity-100 text-white leading-[30px] cursor-pointer mb-[10px];
   }
 
-  form input {
+  form input,
+  textarea {
     @apply block h-[45px] px-[10px] bg-transparent rounded-lg border border-purple-50;
   }
   form .left label {

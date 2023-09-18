@@ -38,7 +38,7 @@ const AddEvent = () => {
             <input type="time" id="time" required />
 
             <label htmlFor="desc">Event Description</label>
-            <input type="text" id="desc" />
+            <textarea className="h-[150px]" id="desc"></textarea>
           </div>
 
           <div className="right flex-1">

@@ -1,8 +1,12 @@
 import React from "react";
 import { FaSearch } from "react-icons/fa";
 import Event from "../components/Event";
+import { useEventsContext } from "../context/eventsContext";
 
 const Events = () => {
+  //Global state
+  const { events } = useEventsContext();
+
   return (
     <div className="w-full py-[50px] px-[40px]">
       <div className="mx-auto w-[761px] h-[45px] flex border-[1px] border-[#F7F6FD] rounded-[8px]">
@@ -26,14 +30,8 @@ const Events = () => {
           <li className="text-white text-lg font-normal">IDO</li>
         </ul>
         <div className="flex-1 flex flex-wrap gap-[20px]">
-          <Event />
-          <Event />
-          <Event />
-          <Event />
-          <Event />
-          <Event />
-          <Event />
-          <Event />
+          {events.length > 0 &&
+            events.map((event) => <Event key={event.id} event={event} />)}
         </div>
       </div>
     </div>

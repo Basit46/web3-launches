@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { TbWorld } from "react-icons/tb";
 import { BiLogoFacebookCircle, BiLogoTelegram } from "react-icons/bi";
 import { FaInstagramSquare } from "react-icons/fa";
@@ -7,50 +7,66 @@ import { FaXTwitter, FaLocationDot } from "react-icons/fa6";
 import { AiTwotoneCalendar } from "react-icons/ai";
 import { HiUserGroup } from "react-icons/hi";
 import { PiWarningCircleFill } from "react-icons/pi";
+import { useParams } from "react-router-dom";
+import { useEventsContext } from "../context/eventsContext";
 
 const EventDetails = () => {
+  const params = useParams();
+
+  //Global State
+  const { events } = useEventsContext();
+
+  //Local State
+  const [eventDetails, setEventDetails] = useState({});
+
+  useEffect(() => {
+    setEventDetails(events.find((event) => event.id === params.id));
+  }, [params.id]);
   return (
     <div className="event-details w-full py-[50px] px-[60px] flex gap-[86px] justify-between">
       <div className="links">
-        <a href="#" target="blank">
+        <a href={eventDetails?.website} target="blank">
           <TbWorld />
         </a>
-        <a href="#" target="blank">
+        <a href={eventDetails?.facebook} target="blank">
           <BiLogoFacebookCircle />
         </a>
-        <a href="#" target="blank">
+        <a href={eventDetails?.instagram} target="blank">
           <FaInstagramSquare />
         </a>
-        <a href="#" target="blank">
+        <a href={eventDetails?.discord} target="blank">
           <BsDiscord />
         </a>
-        <a href="#" target="blank">
+        <a href={eventDetails?.twitter} target="blank">
           <FaXTwitter />
         </a>
       </div>
 
       <div className="flex-1">
-        <div className="w-full h-[319px] bg-white"></div>
+        <div className="w-full h-[319px] bg-white">
+          <img
+            src={eventDetails?.imgurl}
+            className="w-full h-full object-cover"
+            alt="img"
+          />
+        </div>
 
         <div className="mt-[70px] flex justify-between items-center">
           <div className="w-[551px]">
             <h1 className="mb-[16px] text-[32px] font-bold">
-              Thena Fi Alpha Beta
+              {eventDetails?.name}
             </h1>
             <div className="flex gap-[18px] items-center">
               <AiTwotoneCalendar className="text-white" />
-              <p className="text-xl font-medium">Sat, June 23 2023, 10pm</p>
+              <p className="text-xl font-medium">
+                {eventDetails?.date}, {eventDetails?.time}
+              </p>
             </div>
             <div className="mb-[16px] flex gap-[18px] items-center">
               <FaLocationDot className="text-whte" />
               <p className="text-xl font-medium">Telegram</p>
             </div>
-            <p className="text-base font-medium">
-              We are dedicated to providing you with information about upcoming
-              events and launches in the web3 and cryptocurrency space. We are
-              dedicated to providing you with information about upcoming events
-              and launches in the web3 and cryptocurrency space
-            </p>
+            <p className="text-base font-medium">{eventDetails?.desc}</p>
           </div>
           <div className="w-[290px] h-[148px] bg-white rounded-lg px-[34px] pt-[14px] pb-[23px] flex flex-col justify-between items-center">
             <p className="text-gray-500 text-base">Event starting at</p>

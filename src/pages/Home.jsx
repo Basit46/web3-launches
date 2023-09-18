@@ -1,8 +1,10 @@
 import React from "react";
 import Hero from "../components/Hero";
 import Event from "../components/Event";
+import { useEventsContext } from "../context/eventsContext";
 
 const Home = () => {
+  const { events } = useEventsContext();
   return (
     <div>
       <Hero />
@@ -30,14 +32,8 @@ const Home = () => {
         </select>
 
         <div className="mt-[47px] flex flex-wrap gap-x-[24px] gap-y-[32px] justify-center">
-          <Event />
-          <Event />
-          <Event />
-          <Event />
-          <Event />
-          <Event />
-          <Event />
-          <Event />
+          {events.length > 0 &&
+            events.map((event, index) => <Event key={index} event={event} />)}
         </div>
         <a
           href="#"
