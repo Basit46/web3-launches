@@ -29,4 +29,11 @@
   form .right div input {
     @apply flex-1;
   }
+
+  .event-details .links a {
+    @apply w-[50px] h-[45px] mb-[10px] rounded-lg border border-violet-50 grid place-items-center;
+  }
+  .event-details .links a svg {
+    @apply text-indigo-600;
+  }
 }
