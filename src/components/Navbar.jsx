@@ -43,7 +43,7 @@ const Navbar = () => {
           className="w-[40px] vsm:w-[60px] h-[40px] vsm:h-[60px]"
         />
         <p className="font-bold text-[20px] vsm:text-[35.31px] font-SpaceGrotesk">
-          Web Launcher
+          Web Launches
         </p>
       </Link>
       <div className="hidden xl:flex gap-[30px] items-center font-[500]">
