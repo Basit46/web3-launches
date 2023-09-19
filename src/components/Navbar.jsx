@@ -16,7 +16,7 @@ const Navbar = () => {
       id="nav"
       className="w-full z-[2] sticky top-0 px-[30px] sm:px-[100px] py-[12px] bg-[#1D1C25] flex justify-between items-center cursor-pointer"
     >
-      <div className="hidden md:flex gap-[40px] items-center font-[600]">
+      <div className="hidden xl:flex gap-[40px] items-center font-[600]">
         {userDetails.uid ? (
           <button
             onClick={handleSignOut}
@@ -37,10 +37,16 @@ const Navbar = () => {
         )}
       </div>
       <Link to="/" className="flex gap-[5px] items-center">
-        <img src={logo} alt={logo} className="w-[60px] h-[60px]" />
-        <p className="font-bold text-[39.31px] font-SpaceGrotesk">Logo</p>
+        <img
+          src={logo}
+          alt={logo}
+          className="w-[40px] vsm:w-[60px] h-[40px] vsm:h-[60px]"
+        />
+        <p className="font-bold text-[20px] vsm:text-[35.31px] font-SpaceGrotesk">
+          Web Launcher
+        </p>
       </Link>
-      <div className="hidden md:flex gap-[30px] items-center font-[500]">
+      <div className="hidden xl:flex gap-[30px] items-center font-[500]">
         <NavLink to="/events">Events</NavLink>
         <NavLink to="/addevent">Add Event</NavLink>
         <a href="#">Profile</a>
@@ -48,17 +54,17 @@ const Navbar = () => {
 
       {/* sections that will show on mobile screens */}
       {isOpen ? (
-        <button className="md:hidden">
+        <button className="xl:hidden">
           <FaTimes
             onClick={() => setIsOpen(false)}
-            className="text-[25px] md:hidden text-[red]"
+            className="text-[25px] xl:hidden text-[red]"
           />
         </button>
       ) : (
-        <button className="md:hidden">
+        <button className="xl:hidden">
           <FaBars
             onClick={() => setIsOpen(true)}
-            className="text-[25px] md:hidden"
+            className="text-[25px] xl:hidden"
           />
         </button>
       )}
@@ -68,7 +74,7 @@ const Navbar = () => {
         onClick={() => setIsOpen(false)}
         className={`${
           !isOpen && "hidden"
-        } md:hidden z-[3] fixed top-[83px] left-0 w-full h-[300px] bg-white text-black font-[600] flex flex-col items-center justify-center gap-[20px] text-[1.2rem]`}
+        } xl:hidden z-[3] fixed top-[63px] vsm:top-[83px] left-0 w-full h-[300px] bg-white text-black font-[600] flex flex-col items-center justify-center gap-[20px] text-[1.2rem]`}
       >
         <NavLink to="/events">Events</NavLink>
         <NavLink to="/addevent">Add Event</NavLink>

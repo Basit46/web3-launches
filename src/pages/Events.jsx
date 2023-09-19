@@ -6,7 +6,8 @@ import { categories } from "../constants/categories";
 
 const Events = () => {
   //Global state
-  const { events, filterByCategory, filterBySearch } = useEventsContext();
+  const { events, filterByCategory, filterBySearch, isFetching } =
+    useEventsContext();
 
   //Local state
   const [searchCateg, setSearchCateg] = useState("All");
@@ -26,6 +27,7 @@ const Events = () => {
   const clearSearch = () => {
     setIsSearched(false);
     setSearchText("");
+    filterByCategory("All");
   };
 
   return (
@@ -77,6 +79,7 @@ const Events = () => {
         </div>
 
         <div className="flex-1 flex justify-center xmd:justify-start flex-wrap gap-[20px]">
+          {isFetching && <h1>Loading....</h1>}
           {events &&
             events.map((event) => <Event key={event.id} event={event} />)}
         </div>

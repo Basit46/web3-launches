@@ -11,8 +11,12 @@ import { categories } from "../constants/categories";
 import { useAuthContext } from "../context/authContext";
 import { storage } from "../../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import LoadingModal from "../components/LoadingModal";
+import { useNavigate } from "react-router-dom";
 
 const AddEvent = () => {
+  const navigate = useNavigate();
+
   //Global State
   const { addEvent } = useEventsContext();
   const { userDetails } = useAuthContext();
@@ -35,6 +39,8 @@ const AddEvent = () => {
   });
   const [selectedImage, setSelectedImage] = useState(null);
   const [imgToView, setImgToView] = useState(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   // Refs for input elements
   const nameInputRef = useRef();
@@ -48,6 +54,36 @@ const AddEvent = () => {
   const igInputRef = useRef();
   const dsInputRef = useRef();
   const twtInputRef = useRef();
+  const fileInputRef = useRef(null);
+
+  const handleDragEnter = (e) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = () => {
+    setIsDragging(false);
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    setIsDragging(false);
+
+    const files = e.dataTransfer.files;
+
+    if (files.length > 0) {
+      const selectedFile = files[0];
+      setSelectedImage(selectedFile ? selectedFile : null);
+      setImgToView(selectedFile ? URL.createObjectURL(selectedFile) : null);
+    }
+  };
+
+  const handleClick = () => {
+    // Trigger a click event on the file input element
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
 
   const handleImageChange = (e) => {
     const file = e.target.files?.[0];
@@ -55,14 +91,13 @@ const AddEvent = () => {
     setImgToView(file ? URL.createObjectURL(file) : null);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
+  const handleSubmit = () => {
     if (userDetails.uid == null) {
       alert("Login with your Google account firstly in order to add event");
       return;
     }
 
+    setIsLoading(true);
     const storageRef = ref(storage, `/files/${uuid()}img`);
     const uploadTask = uploadBytesResumable(storageRef, selectedImage);
     uploadTask.on(
@@ -94,29 +129,40 @@ const AddEvent = () => {
 
           // Call the addEvent function with the newEventData
           addEvent(newEventData);
-          console.log("done");
+          navigate("/events");
         });
       }
     );
+    setIsLoading(false);
   };
 
   return (
-    <div className="w-full pt-[60px] pb-[40px]">
+    <div className="relative w-full pt-[60px] pb-[40px]">
+      {isLoading && <LoadingModal />}
       <form
         onSubmit={(e) => handleSubmit(e)}
         className="mx-auto w-[90%] xmd:w-[80%]"
       >
-        <div className="relative w-full h-[355px] bg-transparent border-white border-2 border-dashed">
+        <div
+          onDragEnter={handleDragEnter}
+          onDragOver={handleDragEnter}
+          onDragLeave={handleDragLeave}
+          onDrop={handleDrop}
+          className="relative w-full h-[200px] vsm:h-[250px] sm:h-[355px] bg-transparent border-white border-2 border-dashed"
+        >
           <div className="w-full h-full flex flex-col items-center gap-[16px] justify-center">
-            <div className="bg-white h-[57px] w-[57px] rounded-full grid place-items-center">
+            <div className="hidden bg-white h-[57px] w-[57px] rounded-full vsm:grid place-items-center">
               <FiUpload className="text-[#453DDB]" />
             </div>
-            <p className="text-center text-white text-2xl">
-              Drag and drop files here
+            <p className="hidden vsm:block text-center text-white text-2xl">
+              {isDragging ? "Drop the image here" : "Drag and drop files here"}
               <br />
               OR
             </p>
-            <button className="rounded-2xl border border-indigo-600 py-[14px] px-[70.5px] text-white text-base font-medium">
+            <button
+              onClick={handleClick}
+              className="rounded-2xl border border-indigo-600 py-[14px] px-[70.5px] text-white text-base font-medium"
+            >
               Browse Files
             </button>
             <input
@@ -124,6 +170,8 @@ const AddEvent = () => {
               id="imgurl"
               accept="image/*"
               onChange={handleImageChange}
+              style={{ display: "none" }} // Hide the file input
+              ref={fileInputRef} // Associate the ref with the input element
             />
           </div>
 
@@ -219,11 +267,12 @@ const AddEvent = () => {
           </div>
         </div>
 
-        <input
+        <button
+          onClick={handleSubmit}
           className="mt-[80px] block mx-auto px-[70px] pt-3 pb-[13px] bg-indigo-600 border-none cursor-pointer rounded text-white text-base font-medium"
-          type="submit"
-          value="ADD EVENT"
-        />
+        >
+          ADD EVENT
+        </button>
       </form>
     </div>
   );

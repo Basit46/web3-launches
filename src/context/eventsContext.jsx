@@ -5,12 +5,14 @@ import { onSnapshot, collection, setDoc, doc } from "firebase/firestore";
 const eventsContext = createContext();
 
 const EventsContextProvider = ({ children }) => {
+  const [isFetching, setIsFetching] = useState(true);
   const [recEvents, setRecEvents] = useState([]);
   const [events, setEvents] = useState(recEvents);
   const [homeEvents, setHomeEvents] = useState(recEvents);
 
   useEffect(() => {
     onSnapshot(collection(db, "events"), (snapshot) => {
+      setIsFetching(true);
       const updatedData = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
@@ -18,6 +20,7 @@ const EventsContextProvider = ({ children }) => {
       setRecEvents(updatedData);
       setEvents(updatedData);
       setHomeEvents(updatedData);
+      setIsFetching(false);
     });
   }, []);
 
@@ -27,7 +30,6 @@ const EventsContextProvider = ({ children }) => {
 
   const filterByCategoryHome = (category) => {
     if (category === "All") {
-      console.log("hello one", recEvents);
       setHomeEvents(recEvents);
     } else {
       setHomeEvents(recEvents.filter((event) => event.category === category));
@@ -36,7 +38,6 @@ const EventsContextProvider = ({ children }) => {
 
   const filterByCategory = (category) => {
     if (category === "All") {
-      console.log("hello one", recEvents);
       setEvents(recEvents);
     } else {
       setEvents(recEvents.filter((event) => event.category === category));
@@ -64,6 +65,7 @@ const EventsContextProvider = ({ children }) => {
         filterByCategory,
         filterByCategoryHome,
         filterBySearch,
+        isFetching,
       }}
     >
       {children}

@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
+import ScrollToTop from "./components/ScrollToTop";
 import AddEvent from "./pages/AddEvent";
 import EventDetails from "./pages/EventDetails";
 import Events from "./pages/Events";
@@ -11,12 +12,14 @@ const App = () => {
   return (
     <div className="max-w-[1400px] w-full mx-auto min-h-screen font-Inter bg-[#121418] text-white">
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/addevent" element={<AddEvent />} />
-        <Route path="/events" element={<Events />} />
-        <Route path="/events/:id" element={<EventDetails />} />
-      </Routes>
+      <ScrollToTop>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/addevent" element={<AddEvent />} />
+          <Route path="/events" element={<Events />} />
+          <Route path="/events/:id" element={<EventDetails />} />
+        </Routes>
+      </ScrollToTop>
       <Footer />
     </div>
   );
