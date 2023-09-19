@@ -17,11 +17,45 @@ const EventDetails = () => {
   const { events } = useEventsContext();
 
   //Local State
+  const [start, setStart] = useState(false);
   const [eventDetails, setEventDetails] = useState({});
+  const [remainingTime, setRemainingTime] = useState("");
 
   useEffect(() => {
     setEventDetails(events.find((event) => event.id === params.id));
+
+    setStart(true);
   }, [params.id]);
+
+  useEffect(() => {
+    if (start) {
+      const intervalId = setInterval(calculateRemainingTime, 1000);
+
+      return () => clearInterval(intervalId);
+    }
+  }, [start]);
+
+  const calculateRemainingTime = () => {
+    const now = new Date();
+    const eventDateTime = new Date(
+      `${eventDetails.date}T${eventDetails.time}:00`
+    );
+    const timeDifference = eventDateTime - now;
+
+    if (timeDifference <= 0) {
+      setRemainingTime("Event has already occurred");
+    } else {
+      const hours = Math.floor(timeDifference / 3600000);
+      const minutes = Math.floor((timeDifference % 3600000) / 60000);
+      const seconds = Math.floor((timeDifference % 60000) / 1000);
+      setRemainingTime(
+        `${hours}:${String(minutes).padStart(2, "0")}:${String(
+          seconds
+        ).padStart(2, "0")}`
+      );
+    }
+  };
+
   return (
     <div className="event-details w-full py-[50px] px-[60px] flex gap-[86px] justify-between">
       <div className="links">
@@ -70,7 +104,7 @@ const EventDetails = () => {
           </div>
           <div className="w-[290px] h-[148px] bg-white rounded-lg px-[34px] pt-[14px] pb-[23px] flex flex-col justify-between items-center">
             <p className="text-gray-500 text-base">Event starting at</p>
-            <p className="text-slate-900 text-xl font-bold">00:10:20</p>
+            <p className="text-slate-900 text-xl font-bold">{remainingTime}</p>
             <button className="w-full pt-3 pb-[13px] bg-indigo-600 rounded text-base font-medium">
               VOTE
             </button>

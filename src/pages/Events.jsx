@@ -1,33 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FaSearch, FaTimes } from "react-icons/fa";
 import Event from "../components/Event";
 import { useEventsContext } from "../context/eventsContext";
-import { useSearchParams } from "react-router-dom";
 import { categories } from "../constants/categories";
 
 const Events = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-
   //Global state
   const { events, filterByCategory, filterBySearch } = useEventsContext();
 
   //Local state
+  const [searchCateg, setSearchCateg] = useState("All");
   const [searchText, setSearchText] = useState("");
   const [isSearched, setIsSearched] = useState(false);
 
-  useEffect(() => {
-    if (searchParams.get("search")) {
-      return;
-    }
-    filterByCategory(searchParams.get("category"));
-  }, [searchParams.get("category")]);
-
-  const updateSearchParams = (category) => {
-    setSearchParams({ category });
+  const searchByCategory = (category) => {
+    setSearchCateg(category);
+    filterByCategory(category);
   };
 
   const searchByName = () => {
-    setSearchParams({ search: searchText });
     filterBySearch(searchText);
     setIsSearched(true);
   };
@@ -35,7 +26,6 @@ const Events = () => {
   const clearSearch = () => {
     setIsSearched(false);
     setSearchText("");
-    setSearchParams({ category: "All" });
   };
 
   return (
@@ -72,10 +62,10 @@ const Events = () => {
           <h1 className="text-white text-xl font-bold">Filter</h1>
           {categories.map((category) => (
             <button
-              onClick={() => updateSearchParams(category)}
+              onClick={() => searchByCategory(category)}
               key={category}
               className={`${
-                searchParams.get("category") === category && "font-bold"
+                searchCateg === category && "font-bold"
               } text-white text-left text-lg`}
             >
               {category}
@@ -83,7 +73,7 @@ const Events = () => {
           ))}
         </div>
         <div className="flex-1 flex flex-wrap gap-[20px]">
-          {events.length > 0 &&
+          {events &&
             events.map((event) => <Event key={event.id} event={event} />)}
         </div>
       </div>

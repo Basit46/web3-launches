@@ -42,7 +42,7 @@ const Navbar = () => {
         <p className="font-bold text-[39.31px] font-SpaceGrotesk">Logo</p>
       </Link>
       <div className="hidden md:flex gap-[30px] items-center font-[500]">
-        <NavLink to="/events?category=All">Events</NavLink>
+        <NavLink to="/events">Events</NavLink>
         <NavLink to="/addevent">Add Event</NavLink>
         <a href="#">Profile</a>
       </div>

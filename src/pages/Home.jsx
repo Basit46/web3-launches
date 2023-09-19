@@ -1,25 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import Hero from "../components/Hero";
 import Event from "../components/Event";
 import { useEventsContext } from "../context/eventsContext";
 import { categories } from "../constants/categories";
+import { Link } from "react-router-dom";
 
 const Home = () => {
-  const { events } = useEventsContext();
+  const { homeEvents, filterByCategoryHome } = useEventsContext();
+  const [searchCateg, setSearchCateg] = useState("All");
+
   return (
     <div>
       <Hero />
       <section
         id="events"
-        className="events mx-auto mt-[100px] w-[90%] min-h-[800px] overflow-hidden pt-px pb-[75.75px] rounded-tl-[40px] rounded-tr-[40px] border-l border-r border-t border-neutral-600"
+        className="mx-auto mt-[100px] w-[90%] h-fit overflow-hidden pt-px pb-[75.75px] rounded-tl-[40px] rounded-tr-[40px] border-l border-r border-t border-neutral-600"
       >
-        <ul className="hidden vsm:flex bg-zinc-900 w-full pt-[25px] pb-[33px] items-center justify-center gap-[10px] sm:gap-[35px]">
-          <li>All</li>
-          <li>ICO</li>
-          <li>Launch</li>
-          <li>NFT Mint</li>
-          <li>Conferences</li>
-        </ul>
+        <div className="hidden vsm:flex bg-zinc-900 w-full pt-[25px] pb-[33px] items-center justify-center gap-[10px] sm:gap-[35px]">
+          {categories.map((category) => (
+            <button
+              onClick={() => {
+                filterByCategoryHome(category);
+                setSearchCateg(category);
+              }}
+              key={category}
+              className={`${
+                searchCateg == category
+                  ? "hover:text-purple-50 font-bold"
+                  : "text-zinc-500"
+              } text-center text-lg cursor-pointer`}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
 
         <select
           defaultValue="All"
@@ -33,15 +47,17 @@ const Home = () => {
         </select>
 
         <div className="mt-[47px] flex flex-wrap gap-x-[24px] gap-y-[32px] justify-center">
-          {events.length > 0 &&
-            events.map((event, index) => <Event key={index} event={event} />)}
+          {homeEvents &&
+            homeEvents.map((event, index) => (
+              <Event key={index} event={event} />
+            ))}
         </div>
-        <a
-          href="#"
+        <Link
+          to="/events"
           className="mt-[38.75px] mx-auto block text-indigo-600 text-center"
         >
           See All
-        </a>
+        </Link>
       </section>
     </div>
   );

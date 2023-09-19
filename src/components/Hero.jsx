@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -16,9 +17,12 @@ const Hero = () => {
         <br className="hidden md:block" />
         and launches in the web3 and cryptocurrency space
       </p>
-      <button className="mx-auto block px-[69px] py-[13px] bg-indigo-600 rounded-2xl text-purple-50 font-bold">
+      <Link
+        to="/events"
+        className="w-fit mx-auto block px-[69px] py-[13px] bg-indigo-600 rounded-2xl text-purple-50 font-bold"
+      >
         Discover Event
-      </button>
+      </Link>
     </section>
   );
 };

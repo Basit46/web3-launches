@@ -7,15 +7,17 @@ const eventsContext = createContext();
 const EventsContextProvider = ({ children }) => {
   const [recEvents, setRecEvents] = useState([]);
   const [events, setEvents] = useState(recEvents);
+  const [homeEvents, setHomeEvents] = useState(recEvents);
 
-  const colRef = collection(db, "events");
   useEffect(() => {
-    onSnapshot(colRef, (snapshot) => {
+    onSnapshot(collection(db, "events"), (snapshot) => {
       const updatedData = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
       setRecEvents(updatedData);
+      setEvents(updatedData);
+      setHomeEvents(updatedData);
     });
   }, []);
 
@@ -23,8 +25,18 @@ const EventsContextProvider = ({ children }) => {
     setDoc(doc(db, "events", newEvent.id), newEvent);
   };
 
+  const filterByCategoryHome = (category) => {
+    if (category === "All") {
+      console.log("hello one", recEvents);
+      setHomeEvents(recEvents);
+    } else {
+      setHomeEvents(recEvents.filter((event) => event.category === category));
+    }
+  };
+
   const filterByCategory = (category) => {
     if (category === "All") {
+      console.log("hello one", recEvents);
       setEvents(recEvents);
     } else {
       setEvents(recEvents.filter((event) => event.category === category));
@@ -45,7 +57,14 @@ const EventsContextProvider = ({ children }) => {
 
   return (
     <eventsContext.Provider
-      value={{ events, addEvent, filterByCategory, filterBySearch }}
+      value={{
+        events,
+        homeEvents,
+        addEvent,
+        filterByCategory,
+        filterByCategoryHome,
+        filterBySearch,
+      }}
     >
       {children}
     </eventsContext.Provider>
