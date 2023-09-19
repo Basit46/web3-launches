@@ -47,19 +47,21 @@ const Navbar = () => {
       </div>
 
       {/* sections that will show on mobile screens */}
-      <button className="md:hidden">
-        {isOpen ? (
+      {isOpen ? (
+        <button className="md:hidden">
           <FaTimes
             onClick={() => setIsOpen(false)}
             className="text-[25px] md:hidden text-[red]"
           />
-        ) : (
+        </button>
+      ) : (
+        <button className="md:hidden">
           <FaBars
             onClick={() => setIsOpen(true)}
             className="text-[25px] md:hidden"
           />
-        )}
-      </button>
+        </button>
+      )}
 
       {/* Mobile Nav     */}
       <div

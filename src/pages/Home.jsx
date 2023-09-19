@@ -10,7 +10,7 @@ const Home = () => {
   const [searchCateg, setSearchCateg] = useState("All");
 
   return (
-    <div>
+    <div className="w-full">
       <Hero />
       <section
         id="events"
@@ -36,7 +36,10 @@ const Home = () => {
         </div>
 
         <select
-          defaultValue="All"
+          onClick={(e) => {
+            filterByCategoryHome(e.target.value);
+            setSearchCateg(e.target.value);
+          }}
           className="mt-[20px] block vsm:hidden mx-auto w-[80%] h-[30px] bg-transparent text-white border-[1px] border-white outline-none px-[5px]"
         >
           {categories.map((category) => (
@@ -46,7 +49,7 @@ const Home = () => {
           ))}
         </select>
 
-        <div className="mt-[47px] flex flex-wrap gap-x-[24px] gap-y-[32px] justify-center">
+        <div className="w-full mt-[47px] flex flex-wrap vsm:gap-x-[24px] gap-y-[32px] justify-center">
           {homeEvents &&
             homeEvents.map((event, index) => (
               <Event key={index} event={event} />
