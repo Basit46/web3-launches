@@ -9,7 +9,7 @@ import Home from "./pages/Home";
 
 const App = () => {
   return (
-    <div className="max-w-[1400px] mx-auto min-h-screen font-Inter bg-[#121418] text-white">
+    <div className="max-w-[1400px] w-full mx-auto min-h-screen font-Inter bg-[#121418] text-white">
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />

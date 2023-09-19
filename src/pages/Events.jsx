@@ -29,8 +29,8 @@ const Events = () => {
   };
 
   return (
-    <div className="w-full py-[50px] px-[40px]">
-      <div className="mx-auto w-[761px] h-[45px] flex border-[1px] border-[#F7F6FD] rounded-[8px]">
+    <div className="w-full py-[50px] px-[20px] xmd:px-[40px]">
+      <div className="mx-auto w-full xmd:w-[761px] h-[45px] flex border-[1px] border-[#F7F6FD] rounded-[8px]">
         <input
           type="text"
           placeholder="Search"
@@ -57,22 +57,26 @@ const Events = () => {
         )}
       </div>
 
-      <div className="mt-[61px] flex justify-between gap-[50px]">
-        <div className="w-fit flex flex-col gap-[21px]">
-          <h1 className="text-white text-xl font-bold">Filter</h1>
+      <div className="mt-[61px] flex flex-col xmd:flex-row justify-between gap-[50px]">
+        <div className="w-fit flex flex-wrap xmd:flex-col gap-x-[10px] xmd:gap-[21px]">
+          <h1 className="text-white text-xl font-bold">
+            Filter<span className="xmd:hidden">:</span>
+          </h1>
           {categories.map((category) => (
             <button
               onClick={() => searchByCategory(category)}
               key={category}
               className={`${
-                searchCateg === category && "font-bold"
-              } text-white text-left text-lg`}
+                searchCateg === category &&
+                "underline underline-offset-4 xmd:no-underline font-bold"
+              } text-white w-fit h-fit text-left text-lg`}
             >
               {category}
             </button>
           ))}
         </div>
-        <div className="flex-1 flex flex-wrap gap-[20px]">
+
+        <div className="flex-1 flex justify-center xmd:justify-start flex-wrap gap-[20px]">
           {events &&
             events.map((event) => <Event key={event.id} event={event} />)}
         </div>

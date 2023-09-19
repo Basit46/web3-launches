@@ -101,19 +101,16 @@ const AddEvent = () => {
   };
 
   return (
-    <div className="w-full pt-[60px] pb-[40px] flex justify-center">
-      <form onSubmit={(e) => handleSubmit(e)} className="w-[80%]">
+    <div className="w-full pt-[60px] pb-[40px]">
+      <form
+        onSubmit={(e) => handleSubmit(e)}
+        className="mx-auto w-[90%] xmd:w-[80%]"
+      >
         <div className="relative w-full h-[355px] bg-transparent border-white border-2 border-dashed">
           <div className="w-full h-full flex flex-col items-center gap-[16px] justify-center">
             <div className="bg-white h-[57px] w-[57px] rounded-full grid place-items-center">
               <FiUpload className="text-[#453DDB]" />
             </div>
-            <input
-              type="file"
-              id="imgurl"
-              accept="image/*"
-              onChange={handleImageChange}
-            />
             <p className="text-center text-white text-2xl">
               Drag and drop files here
               <br />
@@ -122,6 +119,12 @@ const AddEvent = () => {
             <button className="rounded-2xl border border-indigo-600 py-[14px] px-[70.5px] text-white text-base font-medium">
               Browse Files
             </button>
+            <input
+              type="file"
+              id="imgurl"
+              accept="image/*"
+              onChange={handleImageChange}
+            />
           </div>
 
           {imgToView && (
@@ -135,8 +138,8 @@ const AddEvent = () => {
           )}
         </div>
 
-        <div className="mt-[64px] flex justify-between gap-[96px]">
-          <div className="left w-[60%] flex flex-col gap-[16px]">
+        <div className="mt-[64px] flex flex-col xmd:flex-row justify-between gap-[96px]">
+          <div className="left w-full xmd:w-[60%] flex flex-col gap-[16px]">
             <label htmlFor="name">Event Name</label>
             <input type="text" id="name" ref={nameInputRef} required />
 

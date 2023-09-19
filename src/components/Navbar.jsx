@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import logo from "../assets/logo.svg";
-import MobileMenu from "./MobileMenu";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 import { useAuthContext } from "../context/authContext";
@@ -62,7 +61,38 @@ const Navbar = () => {
         )}
       </button>
 
-      <MobileMenu isOpen={isOpen} setIsOpen={setIsOpen} />
+      {/* Mobile Nav     */}
+      <div
+        onClick={() => setIsOpen(false)}
+        className={`${
+          !isOpen && "hidden"
+        } md:hidden z-[3] fixed top-[83px] left-0 w-full h-[300px] bg-white text-black font-[600] flex flex-col items-center justify-center gap-[20px] text-[1.2rem]`}
+      >
+        <NavLink to="/events">Events</NavLink>
+        <NavLink to="/addevent">Add Event</NavLink>
+        <a onClick={() => alert("Coming soon")} href="#">
+          Profile
+        </a>
+
+        {userDetails.uid ? (
+          <button
+            onClick={handleSignOut}
+            className="w-[140px] h-[40px] bg-black rounded-[10px] text-white"
+          >
+            Sign Out
+          </button>
+        ) : (
+          <>
+            <button onClick={handleSignIn}>Login</button>
+            <button
+              onClick={handleSignIn}
+              className="w-[140px] h-[40px] bg-black rounded-[10px] text-white"
+            >
+              Sign Up
+            </button>
+          </>
+        )}
+      </div>
     </nav>
   );
 };
