@@ -3,7 +3,7 @@ import { TbWorld } from "react-icons/tb";
 import { BiLogoFacebookCircle, BiLogoTelegram } from "react-icons/bi";
 import { FaInstagramSquare } from "react-icons/fa";
 import { BsDiscord, BsAlarm } from "react-icons/bs";
-import { FaXTwitter, FaLocationDot } from "react-icons/fa6";
+import { FaXTwitter, FaLocationDot, FaTelegram } from "react-icons/fa6";
 import { AiTwotoneCalendar } from "react-icons/ai";
 import { HiUserGroup } from "react-icons/hi";
 import { PiWarningCircleFill } from "react-icons/pi";
@@ -73,6 +73,9 @@ const EventDetails = () => {
         </a>
         <a href={eventDetails?.twitter} target="blank">
           <FaXTwitter />
+        </a>
+        <a href={eventDetails?.telegram} target="blank">
+          <FaTelegram />
         </a>
       </div>
 

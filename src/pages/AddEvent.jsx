@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { FiUpload } from "react-icons/fi";
 import { TbWorld } from "react-icons/tb";
 import { BiLogoFacebookCircle } from "react-icons/bi";
-import { FaInstagramSquare } from "react-icons/fa";
+import { FaInstagramSquare, FaTelegram } from "react-icons/fa";
 import { BsDiscord } from "react-icons/bs";
 import { FaXTwitter } from "react-icons/fa6";
 import { v4 as uuid } from "uuid";
@@ -54,6 +54,7 @@ const AddEvent = () => {
   const igInputRef = useRef();
   const dsInputRef = useRef();
   const twtInputRef = useRef();
+  const teleInputRef = useRef();
   const fileInputRef = useRef(null);
 
   const handleDragEnter = (e) => {
@@ -121,7 +122,7 @@ const AddEvent = () => {
             instagram: igInputRef.current.value,
             locationUrl: linkInputRef.current.value,
             name: nameInputRef.current.value,
-            telegram: newEvent.telegram,
+            telegram: teleInputRef.current.value,
             time: timeInputRef.current.value,
             twitter: twtInputRef.current.value,
             website: webInputRef.current.value,
@@ -263,6 +264,13 @@ const AddEvent = () => {
                 <FaXTwitter />
               </label>
               <input type="url" id="twt" ref={twtInputRef} />
+            </div>
+
+            <div>
+              <label htmlFor="tele">
+                <FaTelegram />
+              </label>
+              <input type="url" id="twt" ref={teleInputRef} />
             </div>
           </div>
         </div>
