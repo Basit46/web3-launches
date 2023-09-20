@@ -36,7 +36,7 @@ const Home = () => {
         </div>
 
         <select
-          onClick={(e) => {
+          onChange={(e) => {
             filterByCategoryHome(e.target.value);
             setSearchCateg(e.target.value);
           }}
