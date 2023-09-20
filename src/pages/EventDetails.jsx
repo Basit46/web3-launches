@@ -126,7 +126,7 @@ const EventDetails = () => {
               <BsAlarm className="w-10 h-10" />
               <span>
                 <p className="text-white text-xl font-bold">Duration</p>
-                <p className="text-stone-300 text-base">10PM - 12PM</p>
+                <p className="text-stone-300 text-base">2 hours</p>
               </span>
             </div>
             <div className="flex gap-[32px] items-center">
