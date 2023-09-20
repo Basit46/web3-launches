@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Hero from "../components/Hero";
 import Event from "../components/Event";
 import { useEventsContext } from "../context/eventsContext";
@@ -8,6 +8,9 @@ import { Link } from "react-router-dom";
 const Home = () => {
   const { homeEvents, filterByCategoryHome } = useEventsContext();
   const [searchCateg, setSearchCateg] = useState("All");
+  useEffect(() => {
+    filterByCategoryHome(searchCateg);
+  }, [searchCateg]);
 
   return (
     <div className="w-full">
@@ -38,7 +41,6 @@ const Home = () => {
         <select
           value={searchCateg}
           onChange={(e) => {
-            filterByCategoryHome(e.target.value);
             setSearchCateg(e.target.value);
           }}
           className="mt-[20px] block vsm:hidden mx-auto w-[80%] h-[30px] bg-transparent text-white border-[1px] border-white outline-none px-[5px]"

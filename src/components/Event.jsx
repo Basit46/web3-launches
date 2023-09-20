@@ -18,7 +18,11 @@ const Event = ({ event }) => {
       className="w-[90%] vsm:w-[300px] sm:w-[249px] h-[282.12px] relative bg-zinc-900 flex flex-col justify-between rounded-[18.28px] border border-zinc-300 overflow-hidden px-[12px] pt-[14.85px] pb-[9.12px]"
     >
       <div className="w-full flex justify-between">
-        <p className="font-bold text-[15.991px]">{event.name}</p>
+        <p className="font-bold text-[15.991px] leading-[1.2]">
+          {event.name.length > 35
+            ? event.name.slice(0, 35) + "..."
+            : event.name}
+        </p>
         <div>
           {isLiked ? (
             <AiFillHeart
