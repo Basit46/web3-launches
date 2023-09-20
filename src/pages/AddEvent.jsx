@@ -7,7 +7,7 @@ import { BsDiscord } from "react-icons/bs";
 import { FaXTwitter } from "react-icons/fa6";
 import { v4 as uuid } from "uuid";
 import { useEventsContext } from "../context/eventsContext";
-import { categories } from "../constants/categories";
+import { addCategories } from "../constants/categories";
 import { useAuthContext } from "../context/authContext";
 import { storage } from "../../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
@@ -22,21 +22,6 @@ const AddEvent = () => {
   const { userDetails } = useAuthContext();
 
   //Local state
-  const [newEvent, setNewEvent] = useState({
-    category: "",
-    date: "",
-    desc: "",
-    discord: "",
-    facebook: "",
-    imgurl: "",
-    instagram: "",
-    locationUrl: "",
-    name: "",
-    telegram: "",
-    time: "",
-    twitter: "",
-    website: "",
-  });
   const [selectedImage, setSelectedImage] = useState(null);
   const [imgToView, setImgToView] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -92,7 +77,9 @@ const AddEvent = () => {
     setImgToView(file ? URL.createObjectURL(file) : null);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
     if (userDetails.uid == null) {
       alert("Login with your Google account firstly in order to add event");
       return;
@@ -130,11 +117,11 @@ const AddEvent = () => {
 
           // Call the addEvent function with the newEventData
           addEvent(newEventData);
+          setIsLoading(false);
           navigate("/events");
         });
       }
     );
-    setIsLoading(false);
   };
 
   return (
@@ -198,7 +185,7 @@ const AddEvent = () => {
               id="categ"
               ref={categoryInputRef}
             >
-              {categories.map((category) => (
+              {addCategories.map((category) => (
                 <option
                   className="bg-[#121418]"
                   key={category}
@@ -275,12 +262,11 @@ const AddEvent = () => {
           </div>
         </div>
 
-        <button
-          onClick={handleSubmit}
+        <input
+          type="submit"
           className="mt-[80px] block mx-auto px-[70px] pt-3 pb-[13px] bg-indigo-600 border-none cursor-pointer rounded text-white text-base font-medium"
-        >
-          ADD EVENT
-        </button>
+          value={!isLoading ? "ADD EVENT" : "Loading..."}
+        />
       </form>
     </div>
   );

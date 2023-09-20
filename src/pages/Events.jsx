@@ -60,7 +60,7 @@ const Events = () => {
       </div>
 
       <div className="mt-[61px] flex flex-col xmd:flex-row justify-between gap-[50px]">
-        <div className="w-fit flex flex-wrap xmd:flex-col gap-x-[10px] xmd:gap-[21px]">
+        <div className="w-fit flex flex-wrap xmd:flex-col gap-[10px] xmd:gap-[21px]">
           <h1 className="text-white text-xl font-bold">
             Filter<span className="xmd:hidden">:</span>
           </h1>
@@ -69,9 +69,10 @@ const Events = () => {
               onClick={() => searchByCategory(category)}
               key={category}
               className={`${
-                searchCateg === category &&
-                "underline underline-offset-4 xmd:no-underline font-bold"
-              } text-white w-fit h-fit text-left text-lg`}
+                searchCateg === category
+                  ? "bg-white text-black xmd:bg-transparent xmd:text-white font-bold"
+                  : "text-white"
+              } px-[5px] xmd:px-0 border-[1px] border-white xmd:border-none w-fit h-fit text-left text-lg`}
             >
               {category}
             </button>
