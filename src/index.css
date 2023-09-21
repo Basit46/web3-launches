@@ -36,6 +36,15 @@
   }
 }
 
+.event {
+  background: linear-gradient(
+    168deg,
+    rgba(206, 143, 255, 0.79) 3.2%,
+    #003fe1 91.13%,
+    rgba(0, 63, 225, 0.76) 91.13%
+  );
+}
+
 .lds-ring {
   display: inline-block;
   position: relative;

@@ -1,12 +1,8 @@
-import React, { useState } from "react";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import eventImg from "../assets/eventImg.png";
-import bsc from "../assets/bsc.png";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const Event = ({ event }) => {
   const navigate = useNavigate();
-  const [isLiked, setIsLiked] = useState(true);
 
   const handleNavigate = () => {
     navigate(`/events/${event.id}`);
@@ -15,38 +11,40 @@ const Event = ({ event }) => {
   return (
     <div
       onClick={handleNavigate}
-      className="w-[90%] vsm:w-[300px] sm:w-[249px] h-[282.12px] relative bg-zinc-900 flex flex-col justify-between rounded-[18.28px] border border-zinc-300 overflow-hidden px-[12px] pt-[14.85px] pb-[9.12px]"
+      className="event w-[90%] vsm:w-[300px] sm:w-[308px] h-[414px] relative flex flex-col justify-between rounded-[18.28px] border border-zinc-300 overflow-hidden px-[12px] pt-[14.85px] pb-[9.12px]"
     >
-      <div className="w-full flex justify-between">
-        <p className="font-bold text-[15.991px] leading-[1.2]">
-          {event.name.length > 35
-            ? event.name.slice(0, 35) + "..."
-            : event.name}
+      <h1 className="text-center text-white text-[22px] font-bold">
+        Project Name
+      </h1>
+      <div className="w-full h-[118px] bg-opacity-40 bg-zinc-300 rounded-lg"></div>
+      <div className="bg-black bg-opacity-30 h-[105px] rounded-[7px] px-[9px] py-[5px]">
+        <p className=" text-white text-lg font-bold">
+          discription lorium ipsum text upto 280 words
         </p>
-        <div>
-          {isLiked ? (
-            <AiFillHeart
-              onClick={() => setIsLiked(false)}
-              className="text-[red] text-[27px]"
-            />
-          ) : (
-            <AiOutlineHeart
-              onClick={() => setIsLiked(true)}
-              className="text-[red] text-[27px]"
-            />
-          )}
-        </div>
       </div>
-      <div className="w-full h-[159px]">
-        <img
-          src={event.imgurl ? event.imgurl : eventImg}
-          alt="event"
-          className="h-full w-full object-cover"
-        />
+      <div className="p-[5px] w-full flex justify-between bg-opacity-30 bg-zinc-300 rounded">
+        <p className="opacity-80 text-white text-lg">27-Oct-2069</p>
+        <p className="opacity-80 text-white text-lg">68:89:53</p>
       </div>
-      <div className="w-full pl-[7px] pr-2 py-1.5 rounded-[18.28px] border border-indigo-600 flex justify-between items-center">
-        <img src={bsc} alt="bsc" />
-        <p>{event.date}</p>
+      <div className="flex justify-between">
+        <a
+          href="#"
+          className="bg-indigo-800 rounded-[5px] px-[16px] py-[5px] text-white text-[13px]"
+        >
+          Website
+        </a>
+        <a
+          href="#"
+          className="bg-indigo-800 rounded-[5px] px-[16px] py-[5px] text-white text-[13px]"
+        >
+          Telegram
+        </a>
+        <a
+          href="#"
+          className="bg-indigo-800 rounded-[5px] px-[16px] py-[5px] text-white text-[13px]"
+        >
+          Twitter
+        </a>
       </div>
     </div>
   );
