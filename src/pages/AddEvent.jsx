@@ -29,34 +29,26 @@ const AddEvent = () => {
 
   // Refs for input elements
   const nameInputRef = useRef();
-  const categoryInputRef = useRef();
-  const linkInputRef = useRef();
   const dateInputRef = useRef();
   const timeInputRef = useRef();
   const descInputRef = useRef();
   const webInputRef = useRef();
-  const fbInputRef = useRef();
-  const igInputRef = useRef();
-  const dsInputRef = useRef();
   const twtInputRef = useRef();
   const teleInputRef = useRef();
   const fileInputRef = useRef(null);
 
+  // Drag and Drop handler
   const handleDragEnter = (e) => {
     e.preventDefault();
     setIsDragging(true);
   };
-
   const handleDragLeave = () => {
     setIsDragging(false);
   };
-
   const handleDrop = (e) => {
     e.preventDefault();
     setIsDragging(false);
-
     const files = e.dataTransfer.files;
-
     if (files.length > 0) {
       const selectedFile = files[0];
       setSelectedImage(selectedFile ? selectedFile : null);
@@ -64,8 +56,9 @@ const AddEvent = () => {
     }
   };
 
+  //To Select image
+  // Trigger a click event on the Image input element
   const handleClick = () => {
-    // Trigger a click event on the file input element
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
@@ -99,15 +92,10 @@ const AddEvent = () => {
         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
           const newEventData = {
             id: uuid(),
-            category: categoryInputRef.current.value,
             date: dateInputRef.current.value,
             desc: descInputRef.current.value,
-            discord: dsInputRef.current.value,
             eventAdderUid: userDetails.uid,
-            facebook: fbInputRef.current.value,
             imgurl: url,
-            instagram: igInputRef.current.value,
-            locationUrl: linkInputRef.current.value,
             name: nameInputRef.current.value,
             telegram: teleInputRef.current.value,
             time: timeInputRef.current.value,
@@ -179,26 +167,6 @@ const AddEvent = () => {
             <label htmlFor="name">Event Name</label>
             <input type="text" id="name" ref={nameInputRef} required />
 
-            <label htmlFor="categ">Event Category</label>
-            <select
-              className="text-white bg-transparent"
-              id="categ"
-              ref={categoryInputRef}
-            >
-              {addCategories.map((category) => (
-                <option
-                  className="bg-[#121418]"
-                  key={category}
-                  value={category}
-                >
-                  {category}
-                </option>
-              ))}
-            </select>
-
-            <label htmlFor="link">Event Link</label>
-            <input type="text" id="link" ref={linkInputRef} required />
-
             <label htmlFor="date">Event Date</label>
             <input type="date" id="date" ref={dateInputRef} required />
 
@@ -223,27 +191,6 @@ const AddEvent = () => {
                 <TbWorld />
               </label>
               <input type="url" id="web" ref={webInputRef} />
-            </div>
-
-            <div>
-              <label htmlFor="fb">
-                <BiLogoFacebookCircle />
-              </label>
-              <input type="url" id="fb" ref={fbInputRef} />
-            </div>
-
-            <div>
-              <label htmlFor="ig">
-                <FaInstagramSquare />
-              </label>
-              <input type="url" id="ig" ref={igInputRef} />
-            </div>
-
-            <div>
-              <label htmlFor="ds">
-                <BsDiscord />
-              </label>
-              <input type="url" id="ds" ref={dsInputRef} />
             </div>
 
             <div>
