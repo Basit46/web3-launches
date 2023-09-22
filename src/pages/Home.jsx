@@ -1,16 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Event from "../components/Event";
 import { useEventsContext } from "../context/eventsContext";
-import { categories } from "../constants/categories";
-import { Link } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
+import DateFilter from "../components/DateFilter";
 
 const Home = () => {
-  const { homeEvents, filterByCategoryHome } = useEventsContext();
-  const [searchCateg, setSearchCateg] = useState("All");
-  useEffect(() => {
-    filterByCategoryHome(searchCateg);
-  }, [searchCateg]);
+  const { homeEvents, isFetching } = useEventsContext();
+
+  const currentDate = new Date();
+  const dateList = [];
+
+  // Loop to get the dates from current date to six days ago
+  for (let i = 0; i < 6; i++) {
+    const date = new Date(currentDate);
+    date.setDate(currentDate.getDate() - i);
+
+    // Format the date as 'yyyy-mm-dd' (or any desired format)
+    const formattedDate = `${date.getFullYear()}-${String(
+      date.getMonth() + 1
+    ).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+
+    dateList.push(formattedDate);
+  }
 
   return (
     <div className="w-full bg-[#F0F0F0]">
@@ -33,30 +44,34 @@ const Home = () => {
         </div>
 
         <div className="h-[76px] bg-blue-700 bg-opacity-30 flex items-center justify-center gap-[10px] sm:gap-[30px]">
-          <button className="w-fit bg-neutral-100 rounded-[10px] py-[14px] px-[47px] text-xl font-bold text-black">
-            12SEPT
-          </button>
-          <button className="w-fit bg-neutral-100 rounded-[10px] py-[14px] px-[47px] text-xl font-bold text-black">
-            12SEPT
-          </button>
-          <button className="w-fit bg-neutral-100 rounded-[10px] py-[14px] px-[47px] text-xl font-bold text-black">
-            12SEPT
-          </button>
-          <button className="w-fit bg-neutral-100 rounded-[10px] py-[14px] px-[47px] text-xl font-bold text-black">
-            12SEPT
-          </button>
+          {dateList.reverse().map((date, index) => (
+            <DateFilter key={index} date={date} />
+          ))}
         </div>
 
         <div className="w-full mt-[47px] flex flex-wrap vsm:gap-x-[24px] gap-y-[32px] justify-center">
+          {isFetching && (
+            <div className="lds-roller">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          )}
+
           {homeEvents &&
             homeEvents.map((event, index) => (
               <Event key={index} event={event} />
             ))}
         </div>
 
-        <button className="mt-[38.75px] mx-auto block text-black text-xl text-center">
+        {/* <button className="mt-[38.75px] mx-auto block text-black text-xl text-center">
           Show More
-        </button>
+        </button> */}
       </section>
     </div>
   );

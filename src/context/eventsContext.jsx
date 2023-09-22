@@ -7,8 +7,24 @@ const eventsContext = createContext();
 const EventsContextProvider = ({ children }) => {
   const [isFetching, setIsFetching] = useState(true);
   const [recEvents, setRecEvents] = useState([]);
-  const [events, setEvents] = useState(recEvents);
   const [homeEvents, setHomeEvents] = useState(recEvents);
+  const [currDate, setCurrDate] = useState("");
+
+  const currentDate = new Date();
+
+  useEffect(() => {
+    const formattedDate = `${currentDate.getFullYear()}-${String(
+      currentDate.getMonth() + 1
+    ).padStart(2, "0")}-${String(currentDate.getDate()).padStart(2, "0")}`;
+
+    setCurrDate(formattedDate);
+  }, []);
+
+  useEffect(() => {
+    setHomeEvents(
+      recEvents && recEvents.filter((event) => event.date == currDate)
+    );
+  }, [recEvents, currDate]);
 
   useEffect(() => {
     onSnapshot(collection(db, "events"), (snapshot) => {
@@ -18,8 +34,6 @@ const EventsContextProvider = ({ children }) => {
         ...doc.data(),
       }));
       setRecEvents(updatedData);
-      setEvents(updatedData);
-      setHomeEvents(updatedData);
       setIsFetching(false);
     });
   }, []);
@@ -28,44 +42,14 @@ const EventsContextProvider = ({ children }) => {
     setDoc(doc(db, "events", newEvent.id), newEvent);
   };
 
-  const filterByCategoryHome = (category) => {
-    if (category === "All") {
-      setHomeEvents(recEvents);
-    } else {
-      setHomeEvents(recEvents.filter((event) => event.category === category));
-    }
-  };
-
-  const filterByCategory = (category) => {
-    if (category === "All") {
-      setEvents(recEvents);
-    } else {
-      setEvents(recEvents.filter((event) => event.category === category));
-    }
-  };
-
-  const filterBySearch = (text) => {
-    if (text === "") {
-      setEvents(recEvents);
-    } else {
-      setEvents(
-        recEvents.filter((event) =>
-          event.name.toLowerCase().includes(text.trim().toLowerCase())
-        )
-      );
-    }
-  };
-
   return (
     <eventsContext.Provider
       value={{
-        events,
         homeEvents,
         addEvent,
-        filterByCategory,
-        filterByCategoryHome,
-        filterBySearch,
         isFetching,
+        currDate,
+        setCurrDate,
       }}
     >
       {children}
