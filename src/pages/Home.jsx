@@ -1,11 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import Event from "../components/Event";
 import { useEventsContext } from "../context/eventsContext";
 import { FaSearch } from "react-icons/fa";
 import DateFilter from "../components/DateFilter";
 
 const Home = () => {
-  const { homeEvents, isFetching } = useEventsContext();
+  const { homeEvents, isFetching, filterBySearch } = useEventsContext();
+  const [value, setValue] = useState("");
 
   const currentDate = new Date();
   const dateList = [];
@@ -36,9 +37,14 @@ const Home = () => {
         <div className="mx-auto mt-[35px] mb-[100px] w-full xmd:w-[630px] h-[62px] rounded-[20px] bg-white flex border-[1px] border-[#F7F6FD]">
           <input
             type="text"
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
             className="flex-1 px-[20px] text-black bg-transparent outline-none border-none"
           />
-          <button className="w-[50px] h-full rounded-[8px] grid place-items-center">
+          <button
+            onClick={() => filterBySearch(value)}
+            className="w-[50px] h-full rounded-[8px] grid place-items-center"
+          >
             <FaSearch className="text-black text-[20px]" />
           </button>
         </div>

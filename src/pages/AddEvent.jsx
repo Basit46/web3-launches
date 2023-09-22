@@ -73,8 +73,15 @@ const AddEvent = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (userDetails.uid == null) {
-      alert("Login with your Google account firstly in order to add event");
+    if (nameInputRef.current.value.length > 20) {
+      alert(
+        "Event Name can't be more than 20 characters, It should be short and precise"
+      );
+      return;
+    }
+
+    if (descInputRef.current.value.length > 200) {
+      alert("Event Description can't be more than 200 characters");
       return;
     }
 
@@ -94,7 +101,6 @@ const AddEvent = () => {
             id: uuid(),
             date: dateInputRef.current.value,
             desc: descInputRef.current.value,
-            eventAdderUid: userDetails.uid,
             imgurl: url,
             name: nameInputRef.current.value,
             telegram: teleInputRef.current.value,
@@ -106,7 +112,7 @@ const AddEvent = () => {
           // Call the addEvent function with the newEventData
           addEvent(newEventData);
           setIsLoading(false);
-          navigate("/events");
+          navigate("/");
         });
       }
     );
@@ -190,7 +196,7 @@ const AddEvent = () => {
               <label htmlFor="web">
                 <TbWorld />
               </label>
-              <input type="url" id="web" ref={webInputRef} />
+              <input type="url" id="web" ref={webInputRef} required />
             </div>
 
             <div>

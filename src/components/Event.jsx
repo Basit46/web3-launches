@@ -6,7 +6,7 @@ const Event = ({ event }) => {
   const [timeRemaining, setRemainingTime] = useState("");
 
   useEffect(() => {
-    const intervalId = setInterval(calculateRemainingTime(), 1000);
+    const intervalId = setInterval(calculateRemainingTime, 1000);
 
     return () => clearInterval(intervalId);
   }, []);

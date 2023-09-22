@@ -42,6 +42,15 @@ const EventsContextProvider = ({ children }) => {
     setDoc(doc(db, "events", newEvent.id), newEvent);
   };
 
+  const filterBySearch = (text) => {
+    setHomeEvents(
+      recEvents.filter((event) =>
+        event.name.toLowerCase().includes(text.toLowerCase())
+      )
+    );
+    setCurrDate("");
+  };
+
   return (
     <eventsContext.Provider
       value={{
@@ -50,6 +59,7 @@ const EventsContextProvider = ({ children }) => {
         isFetching,
         currDate,
         setCurrDate,
+        filterBySearch,
       }}
     >
       {children}
