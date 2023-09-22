@@ -15,9 +15,9 @@ const Navbar = () => {
 
       <NavLink
         to="/addevent"
-        className="bg-black rounded-[20px] vsm:rounded-[51px] px-[15px] vsm:px-[20px] md:px-[33px] py-[8px] vsm:py-[15px] text-[18px] md:text-[20px] font-bold text-white"
+        className="bg-black rounded-[20px] vsm:rounded-[51px] flex gap-[8px] px-[15px] vsm:px-[20px] md:px-[33px] py-[8px] vsm:py-[15px] text-[18px] md:text-[20px] font-bold text-white"
       >
-        Submit <span className="hidden vsm:block">Launch</span>
+        <span>Submit</span> <span className="hidden vsm:block">Launch</span>
       </NavLink>
     </nav>
   );
