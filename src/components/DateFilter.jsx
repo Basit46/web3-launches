@@ -11,7 +11,7 @@ const DateFilter = ({ date }) => {
         currDate == date
           ? "text-neutral-100 bg-black"
           : "bg-neutral-100 text-black"
-      } w-fit hover:border-black border-2 rounded-[10px] py-[14px] px-[47px] text-xl font-bold`}
+      } w-fit hover:border-black border-2 rounded-[10px] py-[8px] md:py-[14px] px-[5px] md:px-[47px] text-[15px] md:text-xl font-bold`}
     >
       {formatDate2(date)}
     </button>

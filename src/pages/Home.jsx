@@ -28,9 +28,9 @@ const Home = () => {
     <div className="w-full bg-[#F0F0F0]">
       <section
         id="events"
-        className="mx-auto pt-[100px] w-[90%] h-fit overflow-hidden pb-[75.75px]"
+        className="mx-auto pt-[50px] xmd:pt-[100px] w-[90%] h-fit overflow-hidden pb-[75.75px]"
       >
-        <h1 className="text-black text-center text-8xl font-bold">
+        <h1 className="text-black text-center text-[40px] vsm:text-[60px] xmd:text-8xl font-bold">
           New Launches
         </h1>
 
@@ -49,7 +49,7 @@ const Home = () => {
           </button>
         </div>
 
-        <div className="h-[76px] bg-blue-700 bg-opacity-30 flex items-center justify-center gap-[10px] sm:gap-[30px]">
+        <div className="h-[76px] px-[10px] xmd:py-0 bg-blue-700 bg-opacity-30 flex items-center justify-center gap-[10px] md:gap-[30px]">
           {dateList.reverse().map((date, index) => (
             <DateFilter key={index} date={date} />
           ))}
