@@ -21,6 +21,9 @@ const EventsContextProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
+    if (currDate == "") {
+      return;
+    }
     setHomeEvents(
       recEvents && recEvents.filter((event) => event.date == currDate)
     );
