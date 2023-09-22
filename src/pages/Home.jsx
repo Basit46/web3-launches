@@ -34,7 +34,7 @@ const Home = () => {
           New Launches
         </h1>
 
-        <div className="mx-auto mt-[35px] mb-[100px] w-full xmd:w-[630px] h-[62px] rounded-[20px] bg-white flex border-[1px] border-[#F7F6FD]">
+        <div className="mx-auto mt-[35px] mb-[50px] vsm:mb-[100px] w-full xmd:w-[630px] h-[62px] rounded-[20px] bg-white flex border-[1px] border-[#F7F6FD]">
           <input
             type="text"
             value={value}
