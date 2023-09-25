@@ -9,8 +9,22 @@ const EventsContextProvider = ({ children }) => {
   const [recEvents, setRecEvents] = useState([]);
   const [homeEvents, setHomeEvents] = useState(recEvents);
   const [currDate, setCurrDate] = useState("");
+  const [noEvents, setNoEvents] = useState(false);
 
   const currentDate = new Date();
+
+  useEffect(() => {
+    setNoEvents(false);
+    onSnapshot(collection(db, "events"), (snapshot) => {
+      setIsFetching(true);
+      const updatedData = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setRecEvents(updatedData);
+      setIsFetching(false);
+    });
+  }, []);
 
   useEffect(() => {
     const formattedDate = `${currentDate.getFullYear()}-${String(
@@ -24,22 +38,20 @@ const EventsContextProvider = ({ children }) => {
     if (currDate == "") {
       return;
     }
-    setHomeEvents(
-      recEvents && recEvents.filter((event) => event.date == currDate)
-    );
-  }, [recEvents, currDate]);
+    filterByDate(currDate);
+  }, [recEvents]);
 
-  useEffect(() => {
-    onSnapshot(collection(db, "events"), (snapshot) => {
-      setIsFetching(true);
-      const updatedData = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setRecEvents(updatedData);
-      setIsFetching(false);
-    });
-  }, []);
+  const filterByDate = (currDate) => {
+    const filteredList =
+      recEvents && recEvents.filter((event) => event.date == currDate);
+
+    setHomeEvents(filteredList);
+    if (filteredList.length < 1) {
+      setNoEvents(true);
+    } else {
+      setNoEvents(false);
+    }
+  };
 
   const addEvent = (newEvent) => {
     setDoc(doc(db, "events", newEvent.id), newEvent);
@@ -62,7 +74,9 @@ const EventsContextProvider = ({ children }) => {
         isFetching,
         currDate,
         setCurrDate,
+        filterByDate,
         filterBySearch,
+        noEvents,
       }}
     >
       {children}

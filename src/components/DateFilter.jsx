@@ -3,10 +3,13 @@ import { useEventsContext } from "../context/eventsContext";
 import { formatDate2 } from "../utils/formatDate2";
 
 const DateFilter = ({ date }) => {
-  const { currDate, setCurrDate } = useEventsContext();
+  const { currDate, setCurrDate, filterByDate } = useEventsContext();
   return (
     <button
-      onClick={() => setCurrDate(date)}
+      onClick={() => {
+        setCurrDate(date);
+        filterByDate(date);
+      }}
       className={`${
         currDate == date
           ? "text-neutral-100 bg-black"

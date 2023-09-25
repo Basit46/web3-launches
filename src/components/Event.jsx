@@ -1,35 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { formatDate } from "../utils/formatDate";
 
 const Event = ({ event }) => {
-  //Locsl state
-  const [timeRemaining, setRemainingTime] = useState("");
-
-  useEffect(() => {
-    const intervalId = setInterval(calculateRemainingTime, 1000);
-
-    return () => clearInterval(intervalId);
-  }, []);
-
-  const calculateRemainingTime = () => {
-    const now = new Date();
-    const eventDateTime = new Date(`${event.date}T${event.time}:00`);
-    const timeDifference = eventDateTime - now;
-
-    if (timeDifference <= 0) {
-      setRemainingTime("Event Over");
-    } else {
-      const hours = Math.floor(timeDifference / 3600000);
-      const minutes = Math.floor((timeDifference % 3600000) / 60000);
-      const seconds = Math.floor((timeDifference % 60000) / 1000);
-      setRemainingTime(
-        `${hours}:${String(minutes).padStart(2, "0")}:${String(
-          seconds
-        ).padStart(2, "0")}`
-      );
-    }
-  };
-
   return (
     <div className="event w-[90%] vsm:w-[300px] sm:w-[308px] h-fit vsm:h-[414px] relative flex flex-col justify-between gap-[20px] vsm:gap-0 rounded-[18.28px] border border-zinc-300 overflow-hidden px-[12px] pt-[14.85px] pb-[9.12px]">
       <div className="h-fit vsm:max-h-[16%]">

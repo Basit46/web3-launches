@@ -3,9 +3,11 @@ import Event from "../components/Event";
 import { useEventsContext } from "../context/eventsContext";
 import { FaSearch } from "react-icons/fa";
 import DateFilter from "../components/DateFilter";
+import { BiCalendarX } from "react-icons/bi";
 
 const Home = () => {
-  const { homeEvents, isFetching, filterBySearch } = useEventsContext();
+  const { homeEvents, isFetching, filterBySearch, noEvents } =
+    useEventsContext();
   const [value, setValue] = useState("");
 
   const currentDate = new Date();
@@ -66,6 +68,14 @@ const Home = () => {
               <div></div>
               <div></div>
               <div></div>
+            </div>
+          )}
+          {noEvents && (
+            <div className="flex flex-col items-center">
+              <BiCalendarX className="text-[red] text-[200px]" />
+              <h1 className="text-black text-center text-[1.5rem] vsm:text-[2.5rem]">
+                No Events for today
+              </h1>
             </div>
           )}
 
