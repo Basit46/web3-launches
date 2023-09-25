@@ -44,12 +44,8 @@ const Event = ({ event }) => {
         )}
       </div>
 
-      <div className="relative w-full h-[118px] bg-opacity-40 bg-zinc-300 rounded-lg overflow-hidden">
-        <img
-          src={event.imgurl}
-          alt="event img"
-          className="h-full w-full object-cover"
-        />
+      <div className="relative w-full h-[118px] bg-opacity-40 bg-zinc-300 rounded-lg overflow-hidden flex justify-center">
+        <img src={event.imgurl} alt="event img" className=" object-cover" />
       </div>
       <div className="bg-black bg-opacity-30 h-[105px] max-h-[105px] rounded-[7px] px-[9px] py-[5px]">
         {event.desc.length > 200 ? (
