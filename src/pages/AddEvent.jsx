@@ -137,7 +137,7 @@ const AddEvent = () => {
               <FiUpload className="text-[#453DDB]" />
             </div>
             <p className="hidden vsm:block text-center text-white text-2xl">
-              {isDragging ? "Drop the image here" : "Drag and drop files here"}
+              {isDragging ? "Drop the image here" : "Drag and drop Image here"}
               <br />
               OR
             </p>
@@ -145,7 +145,7 @@ const AddEvent = () => {
               onClick={handleClick}
               className="rounded-2xl border border-indigo-600 py-[14px] px-[70.5px] text-white text-base font-medium"
             >
-              Browse Files
+              Browse Images
             </button>
             <input
               type="file"
