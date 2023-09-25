@@ -27,7 +27,7 @@ const Home = () => {
   }
 
   return (
-    <div className="w-full bg-[#F0F0F0]">
+    <div className="min-h-[100vh] w-full bg-[#F0F0F0]">
       <section
         id="events"
         className="mx-auto pt-[50px] xmd:pt-[100px] w-[90%] h-fit overflow-hidden pb-[75.75px]"
@@ -57,7 +57,7 @@ const Home = () => {
           ))}
         </div>
 
-        <div className="w-full mt-[47px] flex flex-wrap vsm:gap-x-[24px] gap-y-[32px] justify-center">
+        <div className="w-full mt-[47px] flex flex-col xl:flex-row items-center xl:items-auto xl:flex-wrap vsm:gap-x-[24px] gap-y-[32px] justify-center">
           {isFetching && (
             <div className="lds-roller">
               <div></div>
