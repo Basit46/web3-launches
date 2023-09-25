@@ -44,11 +44,11 @@ const Event = ({ event }) => {
         )}
       </div>
 
-      <div className="w-full h-[118px] bg-opacity-40 bg-zinc-300 rounded-lg">
+      <div className="relative w-full h-[118px] bg-opacity-40 bg-zinc-300 rounded-lg overflow-hidden">
         <img
           src={event.imgurl}
           alt="event img"
-          className="w-full h-full object-cover"
+          className="h-full w-full object-cover"
         />
       </div>
       <div className="bg-black bg-opacity-30 h-[105px] max-h-[105px] rounded-[7px] px-[9px] py-[5px]">
@@ -57,7 +57,7 @@ const Event = ({ event }) => {
             {event.desc}
           </p>
         ) : (
-          <p className=" text-white text-[1rem] leading-[1.2] font-bold">
+          <p className=" text-white text-[0.9rem] leading-[1.2] font-bold">
             {event.desc}
           </p>
         )}
@@ -66,7 +66,7 @@ const Event = ({ event }) => {
         <p className="opacity-80 text-white text-lg">
           {formatDate(event.date)}
         </p>
-        <p className="opacity-80 text-white text-lg">{timeRemaining}</p>
+        <p className="opacity-80 text-white text-lg">{event.time}</p>
       </div>
       <div className="flex justify-between">
         <a
