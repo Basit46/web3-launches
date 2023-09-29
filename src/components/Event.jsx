@@ -1,42 +1,59 @@
 import React from "react";
 import { formatDate } from "../utils/formatDate";
 
-const Event = ({ event }) => {
+const Event = ({ event, eventContainer }) => {
   return (
-    <div className="event w-[90%] vsm:w-[300px] sm:w-[308px] h-fit vsm:h-[414px] relative flex flex-col justify-between gap-[20px] vsm:gap-0 rounded-[18.28px] border border-zinc-300 overflow-hidden px-[12px] pt-[14.85px] pb-[9.12px]">
-      <div className="h-fit vsm:max-h-[16%]">
-        {event.name.length > 20 ? (
-          <h1 className="text-center text-white text-[14px] font-bold">
-            {event.name}
-          </h1>
-        ) : (
-          <h1 className="text-center text-white text-[22px] font-bold">
-            {event.name}
-          </h1>
+    <div
+      ref={eventContainer}
+      className="event relative w-[300px] vsm:w-72 min-h-[460px] h-fit flex flex-col justify-between rounded-[11.4px] border border-zinc-300 overflow-hidden px-[12px] pt-[14px] pb-[14.29px]"
+    >
+      <div className="relative w-full h-[228px] bg-opacity-40 bg-red-500 rounded-lg overflow-hidden flex justify-center">
+        {/* Updates */}
+        {event.isLive && (
+          <div className="absolute top-0 left-0 w-[93px] h-6 bg-[#29A51499] rounded-lg grid place-items-center">
+            <p className="text-white text-xs">
+              Live-<span>{event.gain}</span>X
+            </p>
+          </div>
         )}
+        {!event.isLive && (
+          <div className="absolute top-0 right-0 w-[66px] h-6 bg-[#F43737] rounded-lg grid place-items-center">
+            <p className="text-white text-xs">Rugged</p>
+          </div>
+        )}
+
+        <img src={event?.imgurl} alt="event img" className="object-contain" />
       </div>
 
-      <div className="relative w-full h-[118px] bg-opacity-40 bg-zinc-300 rounded-lg overflow-hidden flex justify-center">
-        <img src={event?.imgurl} alt="event img" className="object-cover" />
+      <div className="mt-[21px] mb-[10.67px] h-fit vsm:max-h-[16%]">
+        <h1 className="mix-blend-luminosity text-center text-gray-900 text-lg font-bold font-SpaceGrotesk leading-tight">
+          {event.name}
+        </h1>
       </div>
-      <div className="bg-black bg-opacity-30 min-h-[105px] h-fit vsm:h-[105px] vsm:max-h-[105px] rounded-[7px] px-[9px] py-[5px]">
-        {event.desc.length > 200 ? (
-          <p className="text-white text-[0.7rem] leading-[1.2] font-bold">
-            {event.desc}
-          </p>
-        ) : (
-          <p className="text-white text-[0.9rem] leading-[1.2] font-bold">
-            {event.desc}
-          </p>
-        )}
+
+      <div className="bg-[#9190A5] rounded-md bg-opacity-30 min-h-[105px] h-fit px-[9px] py-[5px]">
+        <p className="text-black text-[14px]">{event.desc}</p>
       </div>
-      <div className="p-[5px] w-full flex justify-between bg-opacity-30 bg-zinc-300 rounded">
-        <p className="opacity-80 text-white text-lg">
+
+      <div className="mt-[6.92px] mb-[3.05px] mx-auto w-[90%] h-[31.33px] px-[10px] bg-opacity-30 bg-[#9190A5] rounded-md flex justify-between items-center">
+        <p className="mix-blend-luminosity text-zinc-800 text-[10.70px]">
+          Launching Date
+        </p>
+        <p className="mix-blend-luminosity text-zinc-900 text-xs font-semibold">
           {formatDate(event.date)}
         </p>
-        <p className="opacity-80 text-white text-lg">{event.time}</p>
       </div>
-      <div className="flex justify-between">
+
+      <div className="mx-auto w-[90%] h-[31.33px] px-[10px] bg-opacity-30 bg-[#9190A5] rounded-md flex justify-between items-center">
+        <p className="mix-blend-luminosity text-zinc-800 text-[10.70px]">
+          Time
+        </p>
+        <p className="mix-blend-luminosity text-zinc-900 text-xs font-semibold">
+          {event.time}
+        </p>
+      </div>
+
+      {/* <div className="flex justify-between">
         <a
           href={event.website}
           target="blank"
@@ -58,7 +75,7 @@ const Event = ({ event }) => {
         >
           Twitter
         </a>
-      </div>
+      </div> */}
     </div>
   );
 };

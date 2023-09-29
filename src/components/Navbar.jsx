@@ -15,9 +15,11 @@ const Navbar = () => {
 
       <NavLink
         to="/addevent"
-        className="bg-black rounded-[20px] vsm:rounded-[51px] flex gap-[8px] px-[15px] vsm:px-[20px] md:px-[33px] py-[8px] vsm:py-[15px] text-[18px] md:text-[20px] font-bold text-white"
+        className="px-[29px] py-[17px] bg-indigo-600 rounded-[10px] text-base font-semibold text-white"
       >
-        <span>Submit</span> <span className="hidden vsm:block">Launch</span>
+        <span>Submit</span>
+        <span className="hidden vsm:inline"> </span>
+        <span className="hidden vsm:inline">Launch</span>
       </NavLink>
     </nav>
   );

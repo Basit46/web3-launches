@@ -1,14 +1,10 @@
 import React, { useState, useRef } from "react";
 import { FiUpload } from "react-icons/fi";
 import { TbWorld } from "react-icons/tb";
-import { BiLogoFacebookCircle } from "react-icons/bi";
-import { FaInstagramSquare, FaTelegram } from "react-icons/fa";
-import { BsDiscord } from "react-icons/bs";
+import { FaTelegram } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { v4 as uuid } from "uuid";
 import { useEventsContext } from "../context/eventsContext";
-import { addCategories } from "../constants/categories";
-import { useAuthContext } from "../context/authContext";
 import { storage } from "../../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import LoadingModal from "../components/LoadingModal";
@@ -19,7 +15,6 @@ const AddEvent = () => {
 
   //Global State
   const { addEvent } = useEventsContext();
-  const { userDetails } = useAuthContext();
 
   //Local state
   const [selectedImage, setSelectedImage] = useState(null);
@@ -107,6 +102,8 @@ const AddEvent = () => {
             time: timeInputRef.current.value,
             twitter: twtInputRef.current.value,
             website: webInputRef.current.value,
+            isLive: true,
+            gain: 1,
           };
 
           // Call the addEvent function with the newEventData

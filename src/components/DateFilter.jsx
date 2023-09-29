@@ -12,9 +12,9 @@ const DateFilter = ({ date }) => {
       }}
       className={`${
         currDate == date
-          ? "text-neutral-100 bg-black"
-          : "bg-neutral-100 text-black"
-      } w-[18%] hover:border-black border-2 rounded-[10px] py-[8px] xl:py-[14px] text-[15px] xl:text-xl font-bold`}
+          ? "bg-[#1BB502] text-white"
+          : "bg-[#AFBCAD] text-[#E4DCDC]"
+      } w-[18%] hover:border-black border-transparent border-2 rounded-xl py-[8px] xl:py-[14px] text-[15px] xl:text-xl font-bold`}
     >
       {formatDate2(date)}
     </button>

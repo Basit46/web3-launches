@@ -6,6 +6,7 @@ export default {
       fontFamily: {
         Inter: ["Inter", "sans-serif"],
         SpaceGrotesk: ["Space Grotesk", "sans-serif"],
+        Satoshi: ["Satoshi", "sans-serif"],
       },
       screens: {
         vsm: "400px",
