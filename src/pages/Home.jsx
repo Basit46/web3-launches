@@ -34,7 +34,6 @@ const Home = () => {
   }
 
   const handleScroll = (isLeft) => {
-    alert(eventContainer.current.clientWidth + 40);
     if (isLeft) {
       containerRef.current.scrollLeft -=
         window.innerWidth > 1200
